@@ -1,42 +1,37 @@
-# Assurance
-🛡️ Projet CASH Assurance - Plateforme de Gestion de Devis
-📝 Description du Projet
-Ce projet consiste en la réalisation et la modélisation d'une plateforme web complète pour CASH Assurances. L'objectif est de digitaliser et de centraliser la gestion des demandes de devis pour les clients.
+## 📌 Project Overview
+Ce dépôt présente une plateforme **Fullstack** complète dédiée à la gestion et à la simulation de devis pour **CASH Assurances**. Le projet vise à moderniser l'expérience client en permettant une tarification instantanée et une gestion rigoureuse des demandes d'assurance.
 
-L'application permet de simuler des tarifs et de gérer des contrats pour trois domaines clés :
+En tant qu'étudiante en double diplôme technologique, j'ai conçu cette application pour lier la modélisation de données métier à une interface utilisateur fluide et fonctionnelle.
 
-🚗 Assurance Automobile : Simulation basée sur le profil du conducteur et le type de véhicule.
+## 🏗️ Architecture & Methodology
+Le projet est structuré autour d'une architecture **MVC (Modèle-Vue-Contrôleur)** permettant une séparation claire des responsabilités :
 
-🏠 Assurance Habitation : Évaluation des garanties pour les logements.
+### 1. Modélisation & Gestion (SQL & phpMyAdmin)
+*   **Objectif** : Stockage sécurisé des profils clients et archivage des simulations de devis.
+*   **Outils** : Utilisation de **MySQL** avec **phpMyAdmin** pour la conception relationnelle des tables.
+*   **Résultat** : Une base de données optimisée pour des requêtes rapides et une intégrité des données assurée.
 
-🌪️ Catastrophes Naturelles (CAT-NAT) : Gestion spécifique des risques climatiques.
-🚀 Technologies Utilisées
-Le projet utilise une architecture Fullstack moderne :
+### 2. Logique Métier & Backend (Python Flask)
+*   **Objectif** : Traitement des formulaires et calcul automatique des primes d'assurance pour l'automobile, l'habitation et les catastrophes naturelles.
+*   **Modules** : Gestion des routes dynamiques et intégration de la logique de calcul métier.
+*   **Implementation** : Utilisation de **Flask** pour assurer la communication entre le frontend et la base de données.
 
-Frontend :
+## 📊 Key Features
+*   **Gestion Multirisque** : Modules spécifiques pour l'assurance **Automobile**, **Habitation** et **Catastrophes Naturelles**.
+*   **Interface Responsive** : Design épuré réalisé en **HTML5** et **CSS3** pour une navigation intuitive.
+*   **Outils Tech** : Stack technologique incluant Python, Flask, MySQL, et Node.js.
 
-HTML5 / CSS3 : Pour une interface utilisateur structurée et stylisée.
+## 📁 Repository Structure
+*   `app.py` : Point d'entrée de l'application Flask contenant la logique de routage et le backend.
+*   `templates/` : Contient les vues HTML dynamiques gérées par le moteur Jinja2.
+*   `static/` : Regroupe les fichiers CSS et les ressources multimédias du site.
+*   `.gitignore` : Optimisé pour exclure l'environnement virtuel (`venv/`) et les fichiers temporaires Python.
 
-Backend :
-
-Python (Flask) : Framework utilisé pour la logique métier et le routage de l'application.
-
-Base de données :
-
-MySQL & phpMyAdmin : Pour la modélisation relationnelle et le stockage des données clients et devis.
-Installation et Lancement
-Pour tester le projet localement :
-
-Cloner le projet :
-
-Bash
-git clone https://github.com/Nadabenamar/Assurance.git
-cd CASH
-Configurer l'environnement :
-
-Créer un environnement virtuel : python -m venv venv.
-
-L'activer : .\venv\Scripts\activate (sur Windows).
+## 🚀 How to Run
+1. **Cloner le projet** :
+   ```bash
+   git clone [https://github.com/Nadabenamar/Assurance.git](https://github.com/Nadabenamar/Assurance.git)
+   cd CASH
 
 Installer Flask : pip install flask mysql-connector-python.
 
