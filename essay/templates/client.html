@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire Client</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #b30000, #7a1c1c, #2e2e2e);
+            background-size: 400% 400%;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 40px;
+            animation: gradientShift 10s infinite alternate ease-in-out;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2em;
+            color: #fff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInDown 1.2s ease;
+        }
+
+        form {
+            max-width: 700px;
+            width: 90%;
+            margin: auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            animation: fadeInUp 1.5s ease;
+        }
+
+        label {
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        input[type="text"], 
+        input[type="email"], 
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            background: rgba(255,255,255,0.95);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        input:focus, select:focus {
+            transform: scale(1.02);
+            box-shadow: 0 0 12px rgba(179, 0, 0, 0.7);
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #b30000, #7a1c1c);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(179, 0, 0, 0.6);
+        }
+
+        /* === DATE PICKER === */
+        .date-picker {
+            position: relative;
+            width: 100%;
+            margin-bottom: 18px;
+        }
+
+        .date-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            background: rgba(255,255,255,0.95);
+            cursor: pointer;
+        }
+
+        .calendar {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            background: rgba(50, 50, 50, 0.9);
+            backdrop-filter: blur(16px);
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+            padding: 20px;
+            display: none;
+            animation: fadeIn 0.4s ease;
+            z-index: 10;
+        }
+
+        .calendar.active {
+            display: block;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+
+        .day {
+            text-align: center;
+            padding: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            color: #fff;
+            transition: 0.3s;
+        }
+
+        .day:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .day.selected {
+            background: #b30000;
+            font-weight: bold;
+        }
+
+        /* === Animations === */
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(-10px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes gradientShift {
+            from { background-position: left; }
+            to { background-position: right; }
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <h1>Formulaire Client</h1>
+
+<form method="POST" 
+      action="{% if page_type == 'habitation' %}{{ url_for('ajouter_client_hab', id_client=id_client) }}{% else %}{{ url_for('ajouter_client_auto', id_client=id_client) }}{% endif %}">
+
+      
+        <label>Nom de famille</label>
+        <input type="text" name="nom_famille">
+
+        <label>Prénom</label>
+        <input type="text" name="prenom">
+
+        <label>Date de naissance</label>
+        <div class="date-picker">
+          <input type="text" class="date-input" name="date_naissance" placeholder="Choisir une date" readonly>
+          <div class="calendar" id="calendar">
+            <div class="calendar-header">
+              <button type="button" id="prev">&#10094;</button>
+              <div id="monthYear"></div>
+              <button type="button" id="next">&#10095;</button>
+            </div>
+            <div class="calendar-days" id="days"></div>
+          </div>
+        </div>
+
+  
+
+  <label>Téléphone mobile</label>
+  <input type="text" name="telephone_mobile">
+
+  <label>Adresse mail</label>
+  <input type="email" name="adresse_mail">
+
+  <label>Numéro d'identité nationale</label>
+  <input type="text" name="num_identite_nationale">
+
+  <label>Sexe</label>
+  <select name="sexe" required>
+      <option value="">-- Sélectionner --</option>
+      <option value="Homme">Homme</option>
+      <option value="Femme">Femme</option>
+  </select>
+
+  <!-- ✅ Choix wilaya -->
+  <label for="wilaya">Wilaya</label>
+  <select name="wilaya" id="id_wilaya" required>
+     <option value="">-- Sélectionner une wilaya --</option>
+    {% for w in wilayas %}
+      <option value="{{ w.id_wilaya }}">{{ w.libelle_wilaya }}</option>
+    {% endfor %}
+  </select>
+  <!-- ✅ Choix commune -->
+  <label for="commune">Commune</label>
+  <select name="commune" id="commune" required>
+    <option value="">-- Sélectionner une commune --</option>
+  </select>
+
+  <label>Votre agence</label>
+  <input type="text" name="agence">
+
+  <label>Code postal</label>
+  <input type="text" name="code_postal">
+
+  <label>Profession</label>
+  <input type="text" name="profession">
+<button  type="submit" >Enregistrer</button>
+
+
+  
+</form>
+
+<script>
+  const wilayaSelect = document.getElementById("id_wilaya");
+  const communeSelect = document.getElementById("commune");
+
+  // Quand la wilaya change, charger les communes depuis Flask
+  wilayaSelect.addEventListener("change", function () {
+    const idWilaya = this.value;
+    communeSelect.innerHTML = "<option value=''>-- Sélectionner une commune --</option>";
+
+    if (idWilaya) {
+      fetch(`/communes/${idWilaya}`)
+        .then(response => response.json())
+        .then(data => {
+  data.forEach(c => {   // ✅ ici, plus besoin de .communes
+    let opt = document.createElement("option");
+    opt.value = c.id_commune;
+    opt.textContent = c.libelle_commune;
+    communeSelect.appendChild(opt);
+  });
+})
+
+
+
+        .catch(error => console.error("Erreur lors du chargement des communes :", error));
+    }
+  });
+</script>
+
+
+
+<script>
+    const dateInput = document.querySelector(".date-input");
+    const calendar = document.getElementById("calendar");
+    const daysContainer = document.getElementById("days");
+    const monthYear = document.getElementById("monthYear");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+
+    let date = new Date();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+
+    const months = [
+      "Janvier","Février","Mars","Avril","Mai","Juin",
+      "Juillet","Août","Septembre","Octobre","Novembre","Décembre"
+    ];
+
+    function renderCalendar() {
+      daysContainer.innerHTML = "";
+      let firstDay = new Date(year, month, 1).getDay();
+      let lastDate = new Date(year, month + 1, 0).getDate();
+      monthYear.textContent = months[month] + " " + year;
+
+      for (let i = 0; i < firstDay; i++) {
+        daysContainer.innerHTML += `<div></div>`;
+      }
+
+      for (let d = 1; d <= lastDate; d++) {
+        const day = document.createElement("div");
+        day.classList.add("day");
+        day.textContent = d;
+        day.onclick = () => {
+          document.querySelectorAll(".day").forEach(el => el.classList.remove("selected"));
+          day.classList.add("selected");
+          dateInput.value = `${d} ${months[month]} ${year}`;
+          calendar.classList.remove("active");
+        };
+        daysContainer.appendChild(day);
+      }
+    }
+
+    dateInput.addEventListener("click", () => {
+      calendar.classList.toggle("active");
+    });
+
+    prev.addEventListener("click", () => {
+      month--;
+      if (month < 0) { month = 11; year--; }
+      renderCalendar();
+    });
+
+    next.addEventListener("click", () => {
+      month++;
+      if (month > 11) { month = 0; year++; }
+      renderCalendar();
+    });
+
+    renderCalendar();
+</script>
+
+</body>
+</html>

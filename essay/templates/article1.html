@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CASH Assurances – Actualité</title>
+  <link rel="icon" href="static/images/logo-2021.png">
+  <style>
+    /* Reset & global */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f5f6fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+       background: linear-gradient(90deg, #ffffff, #970000);
+      padding: 12px 25px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header img {
+      height: 55px;
+      transition: transform 0.3s ease;
+    }
+    header img:hover {
+      transform: scale(1.05);
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #444;
+      font-weight: 600;
+      transition: color 0.3s ease, border-bottom 0.3s ease;
+      position: relative;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      left: 0;
+      bottom: -5px;
+      background: #b30000;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #b30000;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Banner */
+   .banner img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+
+
+    /* Content */
+    .content {
+      padding: 35px;
+    }
+    .content h1 {
+      color: #b30000;
+      font-size: 28px;
+      margin-bottom: 25px;
+      text-align: center;
+      font-weight: 700;
+    }
+    .content p {
+      font-size: 17px;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+    .content strong {
+      color: #b30000;
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: #ccc;
+      text-align: center;
+      padding: 18px;
+      margin-top: 50px;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+    footer span {
+      color: #fff;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav a {
+        margin: 0 8px;
+        font-size: 14px;
+      }
+      .banner img {
+        height: 220px;
+      }
+      .content {
+        padding: 20px;
+      }
+      .content h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="#"><img src="static/images/logo-2021.png" alt="CASH Assurances"></a>
+    <nav>
+      <a href="{{ url_for('home') }}">Accueil</a>
+      <a href="#">Qui sommes-nous ?</a>
+      <a href="#">Nos Produits</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Article -->
+  <div class="container">
+    <div class="banner">
+      <img src="static/images/afr.png" alt="CASH Assurances à l'IATF">
+    </div>
+    <div class="content">
+      <h1>CASH Assurances présente à la Foire Intra-Africaine IATF</h1>
+      <p>
+        Rendez-vous à l’<strong>Intra-African Trade Fair (IATF)</strong> du 04 au 10 septembre à la Safex Pins Maritimes ! 
+        Un espace unique pour renforcer les échanges et créer des synergies entre acteurs économiques du continent. 
+        <strong>CASH Assurances</strong> est fière de soutenir le commerce et l’investissement en Afrique.
+      </p>
+      <p>
+        Ne manquez pas le <strong>mini-sommet des Agences Africaines de Promotion de l’Investissement</strong> organisé en marge de la Foire Commerciale Intra-Africaine « IATF 2025 » le 05 septembre à la Safex Pins Maritimes. 
+        Cet événement majeur réunira des décideurs, entrepreneurs, investisseurs, institutions et acteurs économiques africains pour favoriser les échanges, 
+        renforcer les partenariats stratégiques et stimuler l'intégration commerciale interafricaine.
+      </p>
+      <p>
+        La <strong>CASH Assurances</strong> a le plaisir de vous informer qu'elle sera présente à la Foire Commerciale Intra-Africaine « IATF » du 4 au 10 septembre. 
+        Retrouvez-nous au <strong>pavillon central</strong> et venez à la rencontre de notre équipe pour découvrir nos produits d’assurance.
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © <span>2025</span> CASH Assurances – Tous droits réservés
+  </footer>
+
+</body>
+</html>

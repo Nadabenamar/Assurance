@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CASH Assurance </title>
+  <link rel="icon" href="logo-2021.jpg" type="image/jpg">
+
+
+  <style>
+  img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+
+    :root{
+      --brand-red:#8B0000;    /* rouge foncé */
+      --brand-red-2:#B22222;  /* rouge brique */
+      --ink:#222;
+      --muted:#666;
+      --bg:#f5f5f7;           /* gris clair */
+      --card:#ffffff;
+      --line:#e6e6e9;
+      --focus:#ffffff;        /* doré doux pour focus */
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      padding:0;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--ink);
+      background:var(--bg)
+    }
+   
+    /* Header + nav */
+    header{
+      background:linear-gradient(90deg,var(--brand-red),var(--brand-red-2));
+      color:#fff;
+      padding:14px 20px;
+      box-shadow:0 2px 10px rgba(0,0,0,.15)
+    }
+    .nav-wrap{max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      gap:20px
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px
+    }
+    .brand img{
+      height:54px;
+      width:auto;
+      object-fit:contain;
+      border-radius:6px;
+      background:#fff;
+      padding:6px
+    }
+    .brand h1{
+      font-size:1.4rem;
+      margin:0
+    }
+
+    nav{
+      margin-left:auto;
+      display:flex;
+      gap:6px;
+      position:relative
+    }
+    .nav-item{
+      position:relative
+    }
+    .nav-btn{
+      background:transparent;
+      border:none;
+      color:#fff;
+      font-weight:700;
+      cursor:pointer;
+      padding:10px 14px;
+      border-radius:10px;
+      transition:.2s;
+    }
+    .nav-btn:focus{
+      outline:3px solid var(--focus);outline-offset:2px
+    }
+    .nav-btn:hover{
+      background:rgba(255,255,255,.12)
+    }
+
+    /* Sous-menus (au survol et au clic) */
+.submenu {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  min-width: 220px;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.15);
+  padding: 8px;
+  display: none;
+  z-index: 20;
+}
+
+.submenu a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+
+
+.submenu a:hover {
+  background: #2c3e50;   /* fond sombre au survol */
+  color: #fffefe;        /* texte jaune lisible */
+}
+
+
+.nav-item.open > .submenu {
+  display: block;
+}
+
+/* Section héro */
+.hero {
+  background: linear-gradient(120deg,#fafafa,#e9e9ee);
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 24px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.07);
+}
+
+.hero h2 {
+  color: var(--brand-red);
+  font-size: 2rem;
+  margin: .2rem 0 .6rem;
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.cta-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.btn {
+  background: var(--brand-red);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--brand-red-2);
+}
+
+.btn.secondary {
+  background: #fff;
+  color: var(--brand-red);
+  border: 1px solid var(--brand-red);
+}
+
+.hero-visual {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0,0,0,.1);
+}
+
+.hero-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Panneaux inline (sans changer de page) */
+.inline-panels {
+  max-width: 1200px;
+  margin: 10px auto 0;
+  display: grid;
+  gap: 16px;
+}
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.06);
+  display: none;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.panel-title {
+  font-weight: 800;
+  color: var(--brand-red);
+}
+
+.panel-body {
+  padding: 16px;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 14px;
+}
+
+.option-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  background: #fff;
+}
+
+.option-card h4 {
+  margin: 6px 0 8px;
+  color: var(--brand-red-2);
+}
+
+.option-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Galerie (3 images qui tournent) */
+
+/* Services en cartes */
+/* Section générale */
+.section {
+  max-width: 1200px;
+  margin: 28px auto;
+  padding: 0 10px;
+}
+
+.section h3 {
+  font-size: 1.6rem;
+  margin: 0 0 14px;
+  color: var(--brand-red);
+  text-align: center;
+}
+
+/* Grille de cartes */
+
+
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* responsive */
+  gap: 20px;
+}
+
+/* Style des cartes */
+
+
+
+
+.card {
+  position: relative;
+  border-radius: 14px;
+  padding: 20px;
+  color: rgb(10, 10, 10);
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: 0 6px 14px rgba(0,0,0,.15);
+  overflow: hidden;
+}
+
+/* Effet voile sombre pour lisibilité */
+
+
+
+
+/* Texte de base */
+.card h4,
+.card p {
+  color: black;
+  text-shadow: 1px 1px 3px rgba(255,255,255,0.8); /* contour léger */
+  position: relative;
+  z-index: 1;
+}
+
+.card h4,
+.card p {
+  color: #222; /* un gris très foncé, moins dur que le noir */
+  position: relative;
+  z-index: 1;
+}
+/* Voile sombre au survol seulement */
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: transparent; /* pas visible par défaut */
+    border-radius: 14px;
+    transition: background-color 0.3s ease; /* pour effet progressif */
+}
+
+.card:hover::before {
+    background-color: rgba(0, 0, 0, 0.45); /* apparaît au survol */
+}
+
+
+/* Fonds différents pour chaque carte */
+
+.card.auto {
+
+  background: url("{{ url_for('static', filename='images/devis1.png') }}") no-repeat center/cover;
+}
+.card.home {
+  background: url("{{ url_for('static', filename='images/devis2.png') }}") no-repeat center/cover;
+}
+.card.nature {
+  background: url("{{ url_for('static', filename='images/devis4.png') }}") no-repeat center/cover;
+}
+
+
+.card-text {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  color: white; /* ou une autre couleur lisible */
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  text-align: center;
+}
+
+.card:hover .card-text {
+  opacity: 1;
+}
+
+
+
+
+
+
+/* Effet hover */
+.card:hover {
+  transform: translateY(-6px);
+  transition: transform 0.3s ease;
+}
+
+/* Carte Google */
+.map {
+  background: transparent;
+  border: 20px solid var(--line);
+  border-radius: 80px;
+  overflow: hidden;
+  box-shadow: 80px 17px 80px rgba(0,0,0,.06);
+}
+
+.map iframe {
+  display: block;
+  width: 100%;
+  height: 650px;
+  border: 0;
+}
+
+/* Contact + formulaire commentaires */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 16px;
+}
+
+.contact-box {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 6px 14px rgba(0,0,0,.06);
+}
+
+.info-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.info-list li {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.form label {
+  font-weight: 700;
+  display: block;
+  margin: 8px 0 4px;
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form button {
+  margin-top: 10px;
+}
+
+/* Footer */
+footer {
+  margin-top: 28px;
+  background: #1e1e1e;
+  color: #fff;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 22px 16px;
+  display: grid;
+  gap: 14px;
+}
+
+.copyright {
+  border-top: 1px solid #3a3a3a;
+  padding-top: 12px;
+  color: #bbb;
+  font-size: .95rem;
+}
+
+/* Responsive */
+@media (max-width:900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  .slides img {
+    height: 260px;
+  }
+}
+
+  </style>
+          <link rel="icon" href="static/images/logo-2021.png" type="image/x-icon">
+          
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+          
+
+</head>
+<body>
+  <!-- Barre de contact -->
+  
+
+  <!-- Header + Nav -->
+  <header style="background: linear-gradient(135deg, #1f2a38, #2c3e50); padding: 15px 40px; position: sticky; top:0; z-index:1000; font-family:'Poppins', sans-serif;">
+  <div class="nav-wrap" style="display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:auto; flex-wrap:wrap; gap:20px;">
+
+    <!-- Logo et Nom -->
+    <div class="brand" style="display:flex; align-items:center; gap:15px;">
+      <img src="{{ url_for('static', filename='images/logo-2021.png') }}" alt="Logo CASH" style="height:60px; border-radius:8px; transition: transform 0.3s ease;">
+      <h1 style="color:#ffffff; font-size:1.8em; margin:0; cursor:pointer; transition: color 0.3s ease;">CASH Assurance</h1>
+    </div>
+
+    <!-- Navigation -->
+    <nav aria-label="Navigation principale" style="display:flex; align-items:center; gap:25px; flex-wrap:wrap;">
+
+      <!-- Menu Devis -->
+      <div class="nav-item" style="position:relative;">
+        <button class="nav-btn" data-menu="devis" aria-expanded="false" style="background:none; border:none; color:#ecf0f1; font-weight:500; cursor:pointer; font-size:15px; padding:8px 12px; border-radius:8px; transition: background 0.3s;">
+          Devis ▾
+        </button>
+        <div class="submenu" id="menu-devis" role="menu" aria-label="Menu Devis" style="position:absolute; top:100%; left:0; background:#34495e; border-radius:10px; padding:10px 0; min-width:220px; box-shadow:0 8px 20px rgba(0,0,0,0.3); display:none; flex-direction:column; z-index:50;">
+          <a href="{{ url_for('formulaire_client_auto') }}" role="menuitem" style="padding:10px 20px; color:#ecf0f1; text-decoration:none; transition: background 0.3s;">Devis Automobile</a>
+          <a href="{{ url_for('formulaire_client_hab') }}"role="menuitem" style="padding:10px 20px; color:#ecf0f1; text-decoration:none; transition: background 0.3s;">Devis Habitation</a>
+          <a href="#" role="menuitem" style="padding:10px 20px; color:#ecf0f1; text-decoration:none; transition: background 0.3s;">Devis Catastrophe Naturelle</a>
+        </div>
+      </div>
+
+      <!-- Menu Assurance -->
+      <div class="nav-item" style="position:relative;">
+        <button class="nav-btn" data-menu="assurance" aria-expanded="false" style="background:none; border:none; color:#ecf0f1; font-weight:500; cursor:pointer; font-size:15px; padding:8px 12px; border-radius:8px; transition: background 0.3s;">
+          Assurance ▾
+        </button>
+        <div class="submenu" id="menu-assurance" role="menu" aria-label="Menu Assurance" style="position:absolute; top:100%; left:0; background:#34495e; border-radius:10px; padding:10px 0; min-width:220px; box-shadow:0 8px 20px rgba(0,0,0,0.3); display:none; flex-direction:column; z-index:50;">
+          <a href="#" role="menuitem" style="padding:10px 20px; color:#ecf0f1; text-decoration:none; transition: background 0.3s;">Pour les Particuliers</a>
+          <a href="#" role="menuitem" style="padding:10px 20px; color:#ecf0f1; text-decoration:none; transition: background 0.3s;">Pour les Professionnels</a>
+          <a href="#" role="menuitem" style="padding:10px 20px; color:#ecf0f1; text-decoration:none; transition: background 0.3s;">Pour les Entreprises</a>
+        </div>
+      </div>
+
+      <!-- Liens simples -->
+      <div class="nav-item"><a class="nav-btn" href="#services" style="color:#ecf0f1; text-decoration:none; font-weight:500; padding:8px 12px; border-radius:8px; transition: background 0.3s;">Services</a></div>
+      <div class="nav-item"><a class="nav-btn" href="#contact" style="color:#ecf0f1; text-decoration:none; font-weight:500; padding:8px 12px; border-radius:8px; transition: background 0.3s;">Contact</a></div>
+
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Menu déroulant interactif
+  document.querySelectorAll('.nav-btn[data-menu]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const menu = document.getElementById(`menu-${btn.dataset.menu}`);
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      menu.style.display = expanded ? 'none' : 'flex';
+      btn.setAttribute('aria-expanded', !expanded);
+    });
+  });
+
+  // Fermer menu si clic en dehors
+  window.addEventListener('click', e => {
+    document.querySelectorAll('.nav-btn[data-menu]').forEach(btn => {
+      const menu = document.getElementById(`menu-${btn.dataset.menu}`);
+      if (!btn.contains(e.target) && !menu.contains(e.target)) {
+        menu.style.display = 'none';
+        btn.setAttribute('aria-expanded', false);
+      }
+    });
+  });
+</script>
+
+  <!-- Héro + CTA -->
+  <section class="hero" aria-label="Présentation">
+    <div>
+      <p class="eyebrow" style="letter-spacing:.08em;color:var(--muted);margin:0">Votre sécurité, notre priorité</p>
+      <h2>Assurances simples, rapides et adaptées à vos besoins</h2>
+      <p>Obtenez un devis en quelques clics et bénéficiez d'un accompagnement personnalisé pour particuliers, professionnels et entreprises.</p>
+      <div class="cta-row">
+        <button class="btn" data-open-panel="panel-devis">Obtenir un devis</button>
+        <button class="btn secondary" data-open-panel="panel-assurance">Voir nos assurances</button>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1600&auto=format&fit=crop" alt="Visuel assurance" />
+    </div>
+  </section>
+
+  <!-- Panneaux inline (s'ouvrent sans changer de page) -->
+  <div class="inline-panels">
+    <section id="panel-devis" class="panel" aria-live="polite">
+      <div class="panel-header">
+        <div class="panel-title">Choisissez un type de devis</div>
+        <button class="btn secondary" data-close>Fermer ✕</button>
+      </div>
+      <div class="panel-body">
+        <div class="options">
+          <div class="option-card">
+            <h4>Devis Automobile</h4>
+            <p>Plaquez votre tarif auto en 2 minutes. Assurance tous risques ou tiers.</p>
+            <button class="btn">Commencer</button>
+          </div>
+          <div class="option-card">
+            <h4>Devis Habitation</h4>
+            <p>Protégez votre maison et vos biens. Formules locataire ou propriétaire.</p>
+            <button class="btn">Commencer</button>
+          </div>
+          <div class="option-card">
+            <h4>Catastrophe naturelle</h4>
+            <p>Couverture dédiée aux événements climatiques et géologiques majeurs.</p>
+            <button class="btn">Commencer</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-assurance" class="panel" aria-live="polite">
+      <div class="panel-header">
+        <div class="panel-title">Assurances par profil</div>
+        <button class="btn secondary" data-close>Fermer ✕</button>
+      </div>
+      <div class="panel-body">
+        <div class="options">
+          <div class="option-card">
+            <h4>Particuliers</h4>
+            <p>Auto, habitation, santé, voyage… des offres adaptées à votre vie quotidienne.</p>
+            <button class="btn">Découvrir</button>
+          </div>
+          <div class="option-card">
+            <h4>Professionnels</h4>
+            <p>RC Pro, flotte auto, multirisque pro : protégez votre activité.</p>
+            <button class="btn">Découvrir</button>
+          </div>
+          <div class="option-card">
+            <h4>Entreprises</h4>
+            <p>Solutions complètes: dommages aux biens, cyber, transport, IARD entreprise.</p>
+            <button class="btn">Découvrir</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Galerie 3 images qui défilent -->
+  <!-- Galerie 3 images visibles, défilement série par série -->
+
+<style>
+.slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.series {
+  display: flex;
+  flex-shrink: 0;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.series img {
+  width: 32%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+</style>
+
+<script>
+const track = document.getElementById("slides-track");
+const series = document.querySelectorAll(".series");
+let currentIndex = 0;
+
+function nextSeries() {
+  currentIndex = (currentIndex + 1) % series.length;
+  track.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+setInterval(nextSeries, 3000); // change toutes les 3 secondes
+</script>
+
+
+ <!-- ACTUALITÉS --> 
+<section id="actualites" class="section" aria-label="Actualités de la CASH" style="padding:50px 20px; background-color:#f8f8f8;">
+  <h3 style="text-align:center; color:#b30000; margin-bottom:40px; font-size:2em; letter-spacing:1px;">Actualités de la CASH</h3>
+  <div style="display:flex; justify-content:space-around; gap:20px; flex-wrap:wrap;">
+
+    <!-- ACTUALITÉ 1 -->
+    <div style="flex:1 1 300px; min-height:400px; background:#fff; border-radius:16px; box-shadow:0 8px 20px rgba(0,0,0,0.1); text-align:center; overflow:hidden; transition: transform 0.3s, box-shadow 0.3s;">
+      <a href="{{ url_for('article1') }}">
+            <img src="{{ url_for('static', filename='images/act2.png') }}" alt="Actualité 1" style="width:100%; height:200px; object-fit:cover; transition: transform 0.3s;">
+      </a>
+      <div style="padding:15px;">
+        <h4 style="color:#b30000; margin:10px 0 5px;">CASH Assurances présente à la Foire Intra-africaine IATF</h4>
+        <p style="color:#555; font-size:14px;">Du 4 au 10 septembre, retrouvez notre équipe au pavillon central pour découvrir nos solutions d’assurance.</p>
+          
+      </div>
+    </div>
+
+    <!-- ACTUALITÉ 2 -->
+    <div style="flex:1 1 300px; min-height:400px; background:#fff; border-radius:16px; box-shadow:0 8px 20px rgba(0,0,0,0.1); text-align:center; overflow:hidden; transition: transform 0.3s, box-shadow 0.3s;">
+      <a href="{{ url_for('article2') }}">
+        <img src= "{{ url_for('static', filename='images/act1.jpg') }}" alt="Actualité 2" style="width:100%; height:200px; object-fit:cover; transition: transform 0.3s;">
+      </a>
+      <div style="padding:15px;">
+        <h4 style="color:#b30000; margin:10px 0 5px;">Mme Wided Belhouchet, PDG de CASH Assurance : « Prêts pour la transition énergétique »</h4>
+        <p style="color:#555; font-size:14px;">Dans El Moudjahid, la dirigeante souligne l’engagement de CASH Assurance à accompagner ce virage stratégique.</p>
+      </div>
+    </div>
+
+    <!-- ACTUALITÉ 3 -->
+    <div style="flex:1 1 300px; min-height:400px; background:#fff; border-radius:16px; box-shadow:0 8px 20px rgba(0,0,0,0.1); text-align:center; overflow:hidden; transition: transform 0.3s, box-shadow 0.3s;">
+      <a href="{{ url_for('article3') }}">
+        <img src="{{ url_for('static', filename='images/act3.png') }}" alt="Actualité 3" style="width:100%; height:200px; object-fit:cover; transition: transform 0.3s;">
+      </a>
+      <div style="padding:15px;">
+        <h4 style="color:#b30000; margin:10px 0 5px;">Algerian insurance market on the rise!</h4>
+        <p style="color:#555; font-size:14px;">In 2024, turnover hit 181.3 billion DZD (+4.4%). At CASH Assurances, we’re proud to contribute to this growth and support your success.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Hover effet sur les cartes
+  document.querySelectorAll('#actualites .section > div > div').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.style.transform = 'translateY(-10px)';
+      card.style.boxShadow = '0 12px 30px rgba(0,0,0,0.2)';
+      card.querySelector('img').style.transform = 'scale(1.05)';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'translateY(0)';
+      card.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+      card.querySelector('img').style.transform = 'scale(1)';
+    });
+  });
+</script>
+
+
+  <!-- Services -->
+<section id="services" class="section" aria-label="Nos services">
+  <h3>Nos Services</h3>
+  <div class="cards">
+
+    <article class="card auto">
+      <div class="card-text">
+        <h4>
+          <a href="{{ url_for('formulaire_client_auto') }}">Assurance Automobile</a>
+        </h4>
+        <p>Formules Tiers, Intermédiaire et Tous Risques. Assistance 24/7.</p>
+      </div>
+    </article>
+
+    <article class="card home">
+      <div class="card-text">
+        <h4>
+          <a href="{{ url_for('formulaire_client_hab') }}">Assurance Habitation</a>
+        </h4>
+        <p>Locataire, propriétaire occupant ou non occupant. Déclarations faciles.</p>
+      </div>
+    </article>
+
+    <article class="card nature">
+      <div class="card-text">
+        <h4>
+          <a href="#">Assurance Catastrophes Naturelles</a>
+        </h4>
+        <p>Avec CASH Assurances, protégez votre avenir : même face aux catastrophes naturelles, nous restons à vos côtés.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+
+
+  <!-- Carte + Contact + Formulaire commentaires -->
+  <section id="contact" class="section" aria-label="Nous contacter">
+    <h3>Nous trouver & nous écrire</h3>
+    <div class="contact-grid">
+      <div class="map" aria-label="Carte Google">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d15468.09780993499!2d3.035040201702494!3d36.750642929073656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sla%20cash%20assurance%20maps!5e0!3m2!1sfr!2sdz!4v1755093315750!5m2!1sfr!2sdz"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+          title="Localisation CASH Assurance">
+        </iframe>
+      </div>
+      <div class="contact-box">
+        <h4>Coordonnées</h4>
+        <ul class="info-list">
+          <li>📞 0770 70 56 67 </li>
+          <li>📍 CASH Assurances Siège social, 135 Bd Des Martyrs, Sidi M'Hamed</li>
+          <li>🕒 Dim - Jeu : 8h30 - 16:30 h </li>
+        </ul>
+        <hr style="border:none;border-top:1px solid var(--line);margin:14px 0">
+        <h4>Laisser un commentaire</h4>
+<form class="form" method="POST" action="/contact">
+  <div class="row">
+    <div>
+      <label for="first">Prénom</label>
+      <input id="first" name="prenom" placeholder="Votre prénom" required />
+    </div>
+    <div>
+      <label for="last">Nom</label>
+      <input id="last" name="nom" placeholder="Votre nom" required />
+    </div>
+  </div>
+  <label for="mail">Email</label>
+  <input id="mail" type="email" name="email" placeholder="exemple@mail.com" required />
+  <label for="msg">Commentaire</label>
+  <textarea id="msg" name="commentaire" placeholder="Votre message..." required></textarea>
+  <button class="btn" type="submit">Envoyer</button>
+</form>
+      </div>
+    </div>
+  </section>
+
+ <!-- === Footer corrigé (version finale avec tes couleurs originales) === -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+
+    <!-- Colonne gauche : Logo + Contact -->
+    <section class="col footer-col contact-col" aria-labelledby="footer-contact-title">
+      <div class="brand">
+        <img src="{{ url_for('static', filename='images/logo-2021.png') }}" alt="CASH Assurances — logo" class="logo" loading="lazy" decoding="async" />
+      </div>
+
+      <h2 id="footer-contact-title" class="col-title">Coordonnées</h2>
+      <address class="details">
+        <p><strong>Adresse :</strong> CASH Assurances, Siège social, 135 Bd des Martyrs, Sidi M'Hamed</p>
+        <p><strong>Téléphone :</strong> <a href="tel:+21323967006">023 96 70 06</a></p>
+        <p><strong>Fax :</strong> 023 96 70 24</p>
+        <p><strong>Email :</strong> <a href="mailto:contact@cash-assurances.dz">contact@cash-assurances.dz</a></p>
+      </address>
+    </section>
+
+    <!-- Colonne centre : Produits -->
+    <nav class="col footer-col links-col" aria-labelledby="footer-produits-title">
+      <h2 id="footer-produits-title" class="col-title">Types de devis</h2>
+      <ul class="linklist">
+        <li><a href="{{ url_for('formulaire_client_auto') }}">Devis Automobile</a></li>
+        <li><a href="{{ url_for('formulaire_client_hab') }}">Devis Habitation</a></li>
+        <li><a href="#">Assurance Catastrophe Naturelle</a></li>
+      </ul>
+
+      <h2 class="col-title">Autres devis</h2>
+      <ul class="linklist">
+        <li><a href="#">Tous risques</a></li>
+        <li><a href="#">Responsabilité Civile</a></li>
+        <li><a href="#">Valeur Vénale</a></li>
+      </ul>
+    </nav>
+
+    <!-- Colonne droite : Réseaux sociaux -->
+    <section class="col footer-col social-col" aria-labelledby="footer-social-title">
+      <h2 id="footer-social-title" class="col-title">Suivez-nous</h2>
+      <ul class="social" aria-label="Liens réseaux sociaux">
+        <li>
+          <a href="https://www.facebook.com/cashassurances" aria-label="Facebook — ouvre une nouvelle fenêtre" target="_blank" rel="noopener">
+            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+            <span class="visually-hidden"></span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/company/cashassurances" aria-label="LinkedIn — ouvre une nouvelle fenêtre" target="_blank" rel="noopener">
+            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+            <span class="visually-hidden"></span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/cashassurances" aria-label="Instagram — ouvre une nouvelle fenêtre" target="_blank" rel="noopener">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+            <span class="visually-hidden"></span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/@cashassurances" aria-label="YouTube — ouvre une nouvelle fenêtre" target="_blank" rel="noopener">
+            <i class="fab fa-youtube" aria-hidden="true"></i>
+            <span class="visually-hidden"></span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+
+  <div class="legal">
+    <small>© 2025 CASH Assurances. Tous droits réservés.</small>
+  </div>
+</footer>
+
+<!-- === Styles footer (place-les après tes autres styles) === -->
+<style>
+  .footer {
+    padding: clamp(28px, 4.5vw, 48px) 20px;
+background: linear-gradient(135deg, #1f2a38, #2c3e50);
+
+
+    color: #fff;
+  }
+
+  .footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .footer .col {
+    grid-column: span 12;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  @media (min-width: 720px) {
+    .footer .col { grid-column: span 4; }
+  }
+
+  /* Titres du footer */
+  .footer .col-title {
+    display: block;
+    width: 100%;
+    font-size: 1.05rem;
+    margin: 0 0 8px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid rgba(255,255,255,0.25);
+    letter-spacing: .2px;
+    color: #fff;
+  }
+
+  /* Liens */
+  .footer .linklist { list-style: none; margin: 0; padding: 0; width: 100%; }
+  .footer .linklist li { display: block; }
+  .footer .linklist a {
+    display: block;
+    padding: 6px 0;
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease;
+  }
+  .footer .linklist a:hover,
+  .footer .linklist a:focus { color: #ffd166; }
+
+  /* Coordonnées */
+  .footer .details { margin: 0; line-height: 1.6; }
+
+  /* Réseaux sociaux */
+  .footer .social { list-style: none; display: flex; gap: 12px; padding: 0; margin: 0; }
+  .footer .social a {
+    width: 44px; height: 44px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.08);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .footer .social a:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+
+  /* Bas de page */
+  .footer .legal {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 0.9rem;
+    opacity: 0.9;
+  }
+</style>

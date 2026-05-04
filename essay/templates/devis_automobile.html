@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Devis Automobile</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #b30000, #7a1c1c, #2e2e2e);
+      background-size: 400% 400%;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 40px;
+      animation: gradientShift 10s infinite alternate ease-in-out;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2em;
+      color: #fff;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: fadeInDown 1.2s ease;
+    }
+
+    form {
+      max-width: 700px;
+      width: 90%;
+      margin: auto;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      animation: fadeInUp 1.5s ease;
+    }
+
+    label {
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    input[type="text"], input[type="email"], select, textarea {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 18px;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      background: rgba(255,255,255,0.95);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      transform: scale(1.02);
+      box-shadow: 0 0 12px rgba(179, 0, 0, 0.7);
+      outline: none;
+    }
+
+    .checkbox-group {
+      margin-bottom: 20px;
+      padding: 12px 15px;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    .checkbox-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: normal;
+      color: #fff;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(135deg, #b30000, #7a1c1c);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(179, 0, 0, 0.6);
+    }
+
+    /* === DATE PICKER === */
+    .date-picker {
+      position: relative;
+      width: 100%;
+      margin-bottom: 18px;
+    }
+
+    .date-input {
+      width: 100%;
+      padding: 12px 15px;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      background: rgba(255,255,255,0.95);
+      cursor: pointer;
+    }
+
+    .calendar {
+      position: absolute;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background: rgba(50, 50, 50, 0.9);
+      backdrop-filter: blur(16px);
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+      padding: 20px;
+      display: none;
+      animation: fadeIn 0.4s ease;
+      z-index: 10;
+    }
+
+    .calendar.active {
+      display: block;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+
+    .day {
+      text-align: center;
+      padding: 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    .day:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .day.selected {
+      background: #b30000;
+      font-weight: bold;
+    }
+
+    /* === Animations === */
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes gradientShift {
+      from { background-position: left; }
+      to { background-position: right; }
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>devis automobile</h1>
+    <form method="post" action="{{ url_for('ajouter_auto') }}">
+    <input type="hidden" name="id_client" value="{{ id_client }}">
+
+      <label>Type du véhicule</label>
+      <select name="type_vehicule">
+        <option value="particulier">Particulier</option>
+        <option value="utilitaire">Utilitaire</option>
+      </select>
+
+      <label>Genre du véhicule</label>
+      <input type="text" name="genre_vehicule">
+
+      <label>Usage du véhicule</label>
+      <input type="text" name="usage_vehicule">
+
+      <label>Puissance du véhicule</label>
+      <select name="puissance_vehicule">
+        <option value="2 CV">2 CV</option>
+        <option value="3-4 CV">3-4 CV</option>
+        <option value="5-6 CV">5-6 CV</option>
+        <option value="7-10 CV">7-10 CV</option>
+        <option value="11-14 CV">11-14 CV</option>
+      </select>
+
+      <label>Prix</label>
+      <input type="text" name="prix">
+
+      <label>Durée du contrat</label>
+      <input type="text" name="duree_contrat">
+
+      <label>Type de couverture</label>
+      <select name="type_couverture">
+        <option value="Tous risques">Tous risques</option>
+        <option value="Dommage collision à valeur vénale">Dommage collision à valeur vénale</option>
+        <option value="Dommage collision à valeur limitée">Dommage collision à valeur limitée</option>
+      </select>
+
+      <label>Année de mise en circulation</label>
+      <input type="text" name="annee_mise_circulation">
+
+      <label>Garanties</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="garanties[]" value="Responsabilité Civile"> Responsabilité Civile</label>
+        <label><input type="checkbox" name="garanties[]" value="Protection Juridique"> Protection Juridique</label>
+        <label><input type="checkbox" name="garanties[]" value="Vol objet Multimédia"> Vol objet Multimédia</label>
+      </div>
+
+      <label>Options</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="options[]" value="Turbo"> Turbo</label>
+        <label><input type="checkbox" name="options[]" value="Système d'alarme"> Système d'alarme</label>
+      </div>
+
+      <label>Date du permis</label>
+      <div class="date-picker">
+        <input type="text" class="date-input" name="date_permis" placeholder="Choisir une date" readonly>
+        <div class="calendar" id="calendar">
+          <div class="calendar-header">
+            <button type="button" id="prev">&#10094;</button>
+            <div id="monthYear"></div>
+            <button type="button" id="next">&#10095;</button>
+          </div>
+          <div class="calendar-days" id="days"></div>
+        </div>
+      </div>
+
+      <label>Zone de circulation</label>
+      <input type="text" name="zone_circulation">
+
+      <button type="submit">Envoyer le devis</button>
+    </form>
+  </div>
+
+  <script>
+    const dateInput = document.querySelector(".date-input");
+    const calendar = document.getElementById("calendar");
+    const daysContainer = document.getElementById("days");
+    const monthYear = document.getElementById("monthYear");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+
+    let date = new Date();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+
+    const months = [
+      "Janvier","Février","Mars","Avril","Mai","Juin",
+      "Juillet","Août","Septembre","Octobre","Novembre","Décembre"
+    ];
+
+    function renderCalendar() {
+      daysContainer.innerHTML = "";
+      let firstDay = new Date(year, month, 1).getDay();
+      let lastDate = new Date(year, month + 1, 0).getDate();
+
+      monthYear.textContent = months[month] + " " + year;
+
+      // Correction ici
+      for (let i = 0; i < firstDay; i++) {
+        const empty = document.createElement("div");
+        daysContainer.appendChild(empty);
+      }
+
+      for (let d = 1; d <= lastDate; d++) {
+        const day = document.createElement("div");
+        day.classList.add("day");
+        day.textContent = d;
+
+        day.onclick = () => {
+          document.querySelectorAll(".day").forEach(el => el.classList.remove("selected"));
+          day.classList.add("selected");
+          dateInput.value = `${d} ${months[month]} ${year}`;
+          calendar.classList.remove("active");
+        };
+
+        daysContainer.appendChild(day);
+      }
+    }
+
+    dateInput.addEventListener("click", () => {
+      calendar.classList.toggle("active");
+    });
+
+    prev.addEventListener("click", () => {
+      month--;
+      if (month < 0) {
+        month = 11;
+        year--;
+      }
+      renderCalendar();
+    });
+
+    next.addEventListener("click", () => {
+      month++;
+      if (month > 11) {
+        month = 0;
+        year++;
+      }
+      renderCalendar();
+    });
+
+    renderCalendar();
+  </script>
+</body>
+</html>

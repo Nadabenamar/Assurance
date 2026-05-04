@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>devis habitation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #b30000, #7a1c1c, #2e2e2e);
+            background-size: 400% 400%;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 40px;
+            animation: gradientShift 10s infinite alternate ease-in-out;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2em;
+            color: #fff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInDown 1.2s ease;
+        }
+
+        form {
+            max-width: 700px;
+            width: 90%;
+            margin: auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            animation: fadeInUp 1.5s ease;
+        }
+
+        label {
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        input[type="text"], 
+        input[type="number"], 
+        select, 
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            background: rgba(255,255,255,0.95);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            transform: scale(1.02);
+            box-shadow: 0 0 12px rgba(179, 0, 0, 0.7);
+            outline: none;
+        }
+
+        .checkbox-group {
+            margin-bottom: 20px;
+            padding: 12px 15px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .checkbox-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: normal;
+            color: #fff;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #b30000, #7a1c1c);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(179, 0, 0, 0.6);
+        }
+
+        /* === DATE PICKER === */
+        .date-picker {
+            position: relative;
+            width: 100%;
+            margin-bottom: 18px;
+        }
+
+        .date-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            background: rgba(255,255,255,0.95);
+            cursor: pointer;
+        }
+
+        .calendar {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            background: rgba(50, 50, 50, 0.9);
+            backdrop-filter: blur(16px);
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+            padding: 20px;
+            display: none;
+            animation: fadeIn 0.4s ease;
+            z-index: 10;
+        }
+
+        .calendar.active {
+            display: block;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+
+        .day {
+            text-align: center;
+            padding: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            color: #fff;
+            transition: 0.3s;
+        }
+
+        .day:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .day.selected {
+            background: #b30000;
+            font-weight: bold;
+        }
+
+        /* === Animations === */
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(-10px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes gradientShift {
+            from { background-position: left; }
+            to { background-position: right; }
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <h1>formulaire habitation</h1>
+    
+<form method="post" action="{{ url_for('ajouter_habitation') }}">
+
+    
+
+        <label>Type de l'habitation</label>
+        <input type="text" name="type_habitation">
+
+        <label>Qualité juridique de l'assuré</label>
+        <input type="text" name="qualite_juridique">
+
+        <label>Superficie de l'habitation (m²)</label>
+        <input type="number" name="superficie">
+
+        <label>Superficie développée (Superficie × Nombre d’étages)</label>
+        <input type="text" name="superficie_developpee">
+
+        <label>Valeur du contenu (Mobilier personnel, hors objets de valeur)</label>
+        <input type="number" name="valeur_contenu">
+
+        <label>Nombre de pièces (entre 1 et 15, hors cuisine)</label>
+        <input type="number" min="1" max="15" name="nb_pieces">
+
+        <label>Votre habitation est :</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="habitation[]" value="terrasse"> Située au-dessous d'une terrasse ou balcon</label>
+            <label><input type="checkbox" name="habitation[]" value="risque_pro"> Occupée par plus d'1/4 par un risque professionnel</label>
+            <label><input type="checkbox" name="habitation[]" value="materiaux_durs"> Construite et couverte à 90% en matériaux durs</label>
+            <label><input type="checkbox" name="habitation[]" value="inoccupee"> Inoccupée pour plus de 45 jours</label>
+        </div>
+
+        <label>Votre bien est-il protégé contre le vol :</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="vol[]" value="alarme"> Dispose d'un système d'alarme</label>
+            <label><input type="checkbox" name="vol[]" value="telesurveillance"> Dispose d'un système de télésurveillance</label>
+            <label><input type="checkbox" name="vol[]" value="barreaudage"> Présence de barreaudage</label>
+            <label><input type="checkbox" name="vol[]" value="gardiennage"> Gardiennage H24</label>
+        </div>
+
+        <label>Voulez-vous acheter les extensions suivantes :</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="extensions[]" value="objets_valeur"> Vol objets de valeur</label>
+            <label><input type="checkbox" name="extensions[]" value="tempete"> Tempête, Vents violents et Grêle sur les Toitures</label>
+            <label><input type="checkbox" name="extensions[]" value="intoxication"> Intoxication Alimentaire</label>
+        </div>
+
+        <label>Wilaya de votre bien *</label>
+        <input type="text" name="wilaya">
+
+        <label>Commune de votre bien *</label>
+        <input type="text" name="commune">
+
+        <label>Adresse de votre bien *</label>
+        <textarea name="adresse"></textarea>
+
+        <label>Date d'effet (max 3 mois)</label>
+        <div class="date-picker">
+          <input type="text" class="date-input" name="date_effet" placeholder="Choisir une date" readonly>
+          <div class="calendar" id="calendar">
+            <div class="calendar-header">
+              <button type="button" id="prev">&#10094;</button>
+              <div id="monthYear"></div>
+              <button type="button" id="next">&#10095;</button>
+            </div>
+            <div class="calendar-days" id="days"></div>
+          </div>
+        </div>
+
+        <button type="submit">Envoyer le devis</button>
+    </form>
+</div>
+
+<script>
+    const dateInput = document.querySelector(".date-input");
+    const calendar = document.getElementById("calendar");
+    const daysContainer = document.getElementById("days");
+    const monthYear = document.getElementById("monthYear");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+
+    let date = new Date();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+
+    const months = [
+      "Janvier","Février","Mars","Avril","Mai","Juin",
+      "Juillet","Août","Septembre","Octobre","Novembre","Décembre"
+    ];
+
+    function renderCalendar() {
+      daysContainer.innerHTML = "";
+      let firstDay = new Date(year, month, 1).getDay();
+      let lastDate = new Date(year, month + 1, 0).getDate();
+      monthYear.textContent = months[month] + " " + year;
+
+      for (let i = 0; i < firstDay; i++) {
+        daysContainer.innerHTML += `<div></div>`;
+      }
+
+      for (let d = 1; d <= lastDate; d++) {
+        const day = document.createElement("div");
+        day.classList.add("day");
+        day.textContent = d;
+        day.onclick = () => {
+          document.querySelectorAll(".day").forEach(el => el.classList.remove("selected"));
+          day.classList.add("selected");
+          dateInput.value = `${d} ${months[month]} ${year}`;
+          calendar.classList.remove("active");
+        };
+        daysContainer.appendChild(day);
+      }
+    }
+
+    dateInput.addEventListener("click", () => {
+      calendar.classList.toggle("active");
+    });
+
+    prev.addEventListener("click", () => {
+      month--;
+      if (month < 0) { month = 11; year--; }
+      renderCalendar();
+    });
+
+    next.addEventListener("click", () => {
+      month++;
+      if (month > 11) { month = 0; year++; }
+      renderCalendar();
+    });
+
+    renderCalendar();
+</script>
+
+</body>
+</html>

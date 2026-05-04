@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CASH Assurances – Actualité</title>
+  <link rel="icon" href="static/images/logo-2021.png">
+  
+  <!-- Police Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+       background: linear-gradient(90deg, #ffffff, #8d0303);
+      padding: 10px 20px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header img {
+      height: 50px;
+    }
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #b30000;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    /* Banner */
+    .banner img {
+      width: 100%;
+      max-height: 350px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Content */
+    .content {
+      padding: 30px;
+    }
+    .content h1 {
+      color: #b30000;
+      font-size: 28px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .content h2 {
+      font-size: 20px;
+      margin: 20px 0 10px;
+      color: #444;
+    }
+    .content p {
+      font-size: 16px;
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+
+    /* Footer */
+    footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 14px;
+    }
+    footer a {
+      color: #b30000;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .content {
+        padding: 20px;
+      }
+      .content h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="#"><img src="static/images/logo-2021.png" alt="CASH Assurances"></a>
+    <nav>
+      <a href="{{ url_for('home') }}">Accueil</a>
+      <a href="#">Qui sommes-nous ?</a>
+      <a href="#">Nos Produits</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Article -->
+  <div class="container">
+    <div class="banner">
+      <img src="{{ url_for('static', filename='images/act1.jpg') }}" alt="CASH Assurances à l'IATF">
+    </div>
+    <div class="content">
+      <h1>Mme Wided Belhouchet, PDG de CASH Assurance : « Prêts pour la transition énergétique »</h1>
+      
+      <p>
+        Mme <strong>Wided Belhouchet</strong>, Présidente-directrice générale de <strong>CASH Assurance</strong>, filiale du groupe Sonatrach, 
+        a accordé un entretien au journal <em>El Moudjahid</em> le 17 octobre 2024, en marge de la 12ᵉ édition du <strong>Salon Napec-2024</strong>. 
+        À cette occasion, elle a souligné l’importance stratégique de ce rendez-vous international consacré aux industries pétrolières, gazières et énergétiques, 
+        qui constitue une plateforme unique d’échanges et de partenariats entre les acteurs du secteur.
+      </p>
+
+      <h2>Un rôle clé dans la transition énergétique</h2>
+      <p>
+        Mme Belhouchet a mis en avant l’engagement de <strong>CASH Assurance</strong> à accompagner activement la dynamique de 
+        <strong>transition énergétique</strong> que connaît l’Algérie, en proposant des solutions d’assurance innovantes, adaptées aux besoins des entreprises 
+        et investisseurs engagés dans ce processus. Selon elle, la réussite de la transition ne repose pas uniquement sur l’innovation technologique et l’investissement industriel, 
+        mais également sur une couverture assurantielle solide et fiable qui protège les projets et rassure les partenaires.
+      </p>
+
+      <h2>Un engagement régional et international</h2>
+      <p>
+        Elle a également salué la forte participation nationale et internationale au Napec-2024, qui illustre l’intérêt croissant porté à l’Afrique du Nord comme hub énergétique. 
+        Enfin, elle a affirmé que <strong>CASH Assurance</strong> entend renforcer sa présence et son rôle d’accompagnateur privilégié auprès des acteurs économiques, 
+        dans la perspective de bâtir une économie durable et compétitive, tout en soutenant l’investissement et la coopération régionale.
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 CASH Assurances – Tous droits réservés | 
+    <a href="#">Mentions légales</a>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CASH Assurances – Actualité</title>
+  <link rel="icon" href="static/images/logo-2021.png">
+  <style>
+    /* ----------- GLOBAL ----------- */
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f4f6f9;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    /* ----------- HEADER ----------- */
+    header {
+      background: linear-gradient(90deg, #ffffff, #a00202);
+      padding: 12px 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+    }
+    header img {
+      height: 50px;
+    }
+    nav a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: #020202;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffd700;
+    }
+
+    /* ----------- ARTICLE ----------- */
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .banner img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+    }
+    .content {
+      padding: 40px 35px;
+    }
+    .content h1 {
+      color: #b30000;
+      font-size: 30px;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    .content p {
+      font-size: 17px;
+      margin-bottom: 18px;
+      text-align: justify;
+    }
+
+    /* ----------- HIGHLIGHT ----------- */
+    .highlight {
+      background: #f9ecec;
+      border-left: 5px solid #b30000;
+      padding: 15px 20px;
+      font-style: italic;
+      margin: 20px 0;
+      border-radius: 6px;
+    }
+
+    /* ----------- TIMELINE / CHIFFRES ----------- */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin: 35px 0;
+    }
+    .stat-box {
+      background: #fafafa;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+    .stat-box:hover {
+      transform: translateY(-5px);
+    }
+    .stat-box h2 {
+      font-size: 28px;
+      color: #b30000;
+      margin: 10px 0;
+    }
+    .stat-box p {
+      margin: 0;
+      font-size: 15px;
+      color: #555;
+    }
+
+    /* ----------- FOOTER ----------- */
+    footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="#"><img src="static/images/logo-2021.png" alt="CASH Assurances"></a>
+    <nav>
+      <a href="{{ url_for('home') }}">Accueil</a>
+      <a href="#">Qui sommes-nous ?</a>
+      <a href="#">Nos Produits</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Article -->
+  <div class="container">
+    <div class="banner">
+      <img src="{{ url_for('static', filename='images/ligne.jpg') }}" alt="CASH Assurances à l'IATF">
+    </div>
+
+    <div class="content">
+      <h1>Algerian insurance market on the rise!</h1>
+
+      <p>
+        À l’occasion de la 12ᵉ édition du <strong>Salon Napec-2024</strong>, événement de référence pour l’industrie pétrolière,
+        gazière et énergétique en Afrique du Nord, Mme <strong>Wided Belhouchet</strong>, Présidente-directrice générale de 
+        <strong>CASH Assurance</strong>, a livré ses impressions dans un entretien accordé au journal <em>El Moudjahid</em>. 
+      </p>
+
+      <div class="highlight">
+        « La réussite du Napec-2024 illustre non seulement l’intérêt croissant porté à l’Algérie comme hub énergétique, 
+        mais aussi l’importance d’une collaboration renforcée entre les acteurs publics et privés. »
+      </div>
+
+      <p>
+        The Algerian insurance market has shown remarkable resilience and steady growth in recent years. 
+        In <strong>2024</strong>, turnover reached <strong>181.3 billion DZD</strong>, marking a positive increase of 
+        <strong>+4.4%</strong> compared to the previous year. 
+      </p>
+
+      <!-- Chiffres clés -->
+      <div class="stats">
+        <div class="stat-box">
+          <h2>+4.4%</h2>
+          <p>Growth rate in 2024</p>
+        </div>
+        <div class="stat-box">
+          <h2>181.3B DZD</h2>
+          <p>Turnover reached</p>
+        </div>
+        <div class="stat-box">
+          <h2>12ᵉ</h2>
+          <p>Edition of NAPEC</p>
+        </div>
+      </div>
+
+      <p>
+        At <strong>CASH Assurances</strong>, a subsidiary of <strong>Sonatrach Group</strong>, we are proud to 
+        actively contribute to this growth. Our mission goes beyond offering insurance coverage: 
+        we aim to be a reliable partner for both households and enterprises.
+      </p>
+
+      <p>
+        Looking ahead, the perspectives for the Algerian insurance market remain very promising. 
+        With digital transformation, increased awareness among the younger generation, and 
+        government policies encouraging financial inclusion, insurance is becoming an essential pillar 
+        of economic development.
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 CASH Assurances – Tous droits réservés
+  </footer>
+
+</body>
+</html>
